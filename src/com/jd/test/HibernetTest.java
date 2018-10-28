@@ -15,6 +15,7 @@ import com.jd.model.BookAuthor;
 import com.jd.model.BookCategory;
 import com.jd.model.BookHO;
 import com.jd.model.BookLoan;
+import com.jd.model.Publisher;
 import com.jd.model.Student;
 import com.jd.util.HibernateUtil;
 
@@ -30,7 +31,7 @@ public class HibernetTest {
 			sessionFactory = HibernateUtil.getSessionFactory();
 			session = sessionFactory.getCurrentSession();
 			transaction = session.beginTransaction();
-			
+			/*
 			Set<BookHO> bookSets=new HashSet<>();
 			
 			Set<BookLoan>bookloansset2=new HashSet<>();
@@ -42,10 +43,10 @@ public class HibernetTest {
 			author.setPenName("blue Reynald");
 			author.setLastName("ss");
 			
-			/*BookLoan BookLoan1=(BookLoan) session.get(BookLoan.class, 1);
+			BookLoan BookLoan1=(BookLoan) session.get(BookLoan.class, 1);
 			BookLoan BookLoan2=(BookLoan) session.get(BookLoan.class, 2);
 			BookLoan BookLoan3=(BookLoan) session.get(BookLoan.class, 3);
-*/			BookLoan bookLoan1=new BookLoan();
+			BookLoan bookLoan1=new BookLoan();
            bookLoan1.setDateOfIssue(new Date());
           // bookLoan1.setBook(book);
            
@@ -76,47 +77,9 @@ public class HibernetTest {
 			
 		//	System.out.println(BookLoan1.getDateOfIssue());
 			
-			
 			//bookloansset1.add(bookLoan3);
-			
 			bookloansset2.add(bookLoan2);
-			bookloansset2.add(bookLoan3);
-		/*	Set<BookLoan>bookloansset2=new HashSet<>();
-			bookloansset2.add(bookLoan3);
-		*/	
-			/*BookHO bookHO=new BookHO();
-			bookHO.setEdision("4th eddition");
-			bookHO.setName("a film by vinay");
-			bookHO.setNumberOfBookAvailable(2);
-			//bookHO.setBookLoans(bookloansset1);
-			//session.merge(bookHO);
-			
-			BookHO bookHO2=new BookHO();
-			bookHO2.setEdision("3rd eddition");
-			bookHO2.setName("a film by venu");
-			bookHO2.setNumberOfBookAvailable(2);*/
-			//bookHO2.setBookLoans(bookloansset1);
-		//	bookHO2.setBookLoans(bookloansset1);
-			//session.merge(bookHO2);
-			
-			
-			
-			
-			
-			
-			
-			
-			//bookHO2
-			
-		
-			//bookSets.
-			
-			//author.setBooks(bookSets);
-			
-			
-			
-			//author.getBooks().ad
-			
+			bookloansset2.add(bookLoan3);	
 			
 			bookSets.add(bookHO2);
 			bookSets.add(bookHO3);
@@ -124,7 +87,7 @@ public class HibernetTest {
 			author.setBooks(bookSets);
 			
 			session.save(author);
-			
+		*/	
 		/*	
 			Student student1 = new Student();
 			// student1.set(69);
@@ -291,6 +254,28 @@ public class HibernetTest {
 			 */
 			// System.out.println(journey.getPassengers().size());
 
+			Publisher publisher=new Publisher();
+			BookCategory bookCategory=new BookCategory();
+			Set<BookHO> bookSets=new HashSet<>();
+			
+			BookHO bookHO=(BookHO) session.get(BookHO.class, 1);
+			bookHO.setPublisher(publisher);
+			bookHO.setBookCategory(bookCategory);
+			
+			bookSets.add(bookHO);
+			
+			publisher.setCreationDate(new Date());
+			//publisher.getBooks().add(bookHO);
+			publisher.setBooks(bookSets);
+			
+			bookCategory.setName("ssPublications");
+			//bookCategory.getBooks().add(bookHO);
+			bookCategory.setBooks(bookSets);
+			
+			session.save(bookCategory);
+			session.save(publisher);
+			
+			
 			flag = true;
 		} finally {
 			if (transaction != null) {
